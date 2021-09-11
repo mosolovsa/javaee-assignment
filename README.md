@@ -21,5 +21,5 @@ http://127.0.0.1:8080/laba1-1.0-SNAPSHOT/
 Prereqs: Maven and JDK (sudo apt-get install maven)
 
 ```
-mvn war:war
+mvn package
 ```
