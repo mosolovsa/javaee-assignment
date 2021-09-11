@@ -4,6 +4,9 @@ ENV         JAVA_HOME         /usr/lib/jvm/java-8-openjdk-amd64
 ENV         GLASSFISH_HOME    /usr/local/glassfish4
 ENV         PATH              $PATH:$JAVA_HOME/bin:$GLASSFISH_HOME/bin
 
+ENV ADMIN_USER admin
+ENV ADMIN_PASSWORD admin
+
 RUN	    apt-get update && apt-get install -y curl unzip zip inotify-tools && \
             rm -rf /var/lib/apt/lists/; exit 0
 
@@ -15,6 +18,21 @@ EXPOSE      8080 4848 8181
 
 WORKDIR     /usr/local/glassfish4
 
-# verbose causes the process to remain in the foreground so that docker can track it
-CMD         asadmin start-domain --verbose
+# set secure-admin enabled and default password
+RUN echo 'AS_ADMIN_PASSWORD=\n \
+          AS_ADMIN_NEWPASSWORD='$ADMIN_PASSWORD'\n \
+          EOF\n' \
+          >> /opt/tmpfile
 
+RUN echo 'AS_ADMIN_PASSWORD='$ADMIN_PASSWORD'\n \
+          EOF\n' \
+          >> /opt/pwdfile
+
+# during build of the container configuring GlassFish to enable secure-admin
+# default password admin admin
+RUN asadmin start-domain && \
+    asadmin --user $ADMIN_USER --passwordfile=/opt/tmpfile change-admin-password && \
+    asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile enable-secure-admin && \
+    asadmin restart-domain
+
+CMD asadmin start-domain --verbose
