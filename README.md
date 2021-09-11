@@ -9,3 +9,11 @@ cd ${REPODIR}
 docker build -t javaeelaba1 .
 docker run -p 4848:4848 -p 8080:8080 -p 8181:8181 javaeelaba1
 ```
+
+## build WAR
+
+Prereqs: Maven and JDK (sudo apt-get install maven)
+
+```
+mvn war:war
+```
