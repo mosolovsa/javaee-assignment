@@ -1,13 +1,21 @@
-# Assignment #1, course enterprise systems architecture
+# Assignment #1, enterprise systems architecture course
 
-## Glassfish running
+## App building
 
-Prereqs: docker (https://docs.docker.com/get-started/)
+Prereqs: Maven and JDK (sudo apt-get install maven)
+	     docker docker-compose (https://docs.docker.com/get-started/)
 
 ```
 cd ${REPODIR}
+mvn package
 docker build -t javaeelaba1 .
-docker run -p 4848:4848 -p 8080:8080 -p 8181:8181 javaeelaba1
+```
+
+## App running
+
+```
+cd ${REPODIR}
+docker-compose up
 ```
 
 Accessing application:
@@ -33,13 +41,5 @@ docker run -p 4848:4848 -p 8080:8080 -p 8181:8181 -p 41221:9009 javaeelaba1
 ### Idea remote Glassfish debugging
 https://www.jetbrains.com/help/idea/run-debug-configuration-glassfish-server.html
 
-## build WAR
-
-Prereqs: Maven and JDK (sudo apt-get install maven)
-
-```
-mvn package
-```
-
-TODO:
+## TODO:
 - pull app from github and build in container?

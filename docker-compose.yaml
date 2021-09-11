@@ -1,0 +1,23 @@
+version: "3"
+services:
+  db:
+    container_name: todo-db
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    restart: always
+    volumes:
+      - .pgdata:/data/postgres
+
+  app:
+    image: javaeelaba1
+    restart: always
+    ports:
+      - "4848:4848"
+      - "8080:8080"
+      - "8181:8181"
+      - "41221:9009"      
