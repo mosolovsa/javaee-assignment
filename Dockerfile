@@ -35,4 +35,6 @@ RUN asadmin start-domain && \
     asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile enable-secure-admin && \
     asadmin restart-domain
 
+COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
+
 CMD asadmin start-domain --verbose
