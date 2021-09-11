@@ -1,11 +1,11 @@
-package com.ssau.laba1;
+package com.ssau.laba1.controller;
 
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "todoServlet", value = "/todo")
+public class TodoServlet extends HttpServlet {
     private String message;
 
     public void init() {
