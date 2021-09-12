@@ -37,4 +37,4 @@ RUN asadmin start-domain && \
 
 COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
 
-CMD asadmin start-domain --verbose
+CMD asadmin start-domain --debug --verbose
