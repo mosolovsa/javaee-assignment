@@ -3,7 +3,9 @@ package com.ssau.laba1.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "todos")
 @Entity
 public class TodoEntity {
     @Id
