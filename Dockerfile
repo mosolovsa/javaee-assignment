@@ -1,37 +1,40 @@
-# FROM store/oracle/serverjre:8 
-FROM openjdk:8u302-jdk
-#FROM openjdk:11
+FROM        java:8-jdk
 
-# Set environment variables and default password for user 'admin'
-ENV GLASSFISH_PKG=glassfish-5.0.1.zip \
-    GLASSFISH_URL=http://download.oracle.com/glassfish/5.0.1/release \
-    GLASSFISH_HOME=/glassfish5 \
-    PATH=$PATH:/glassfish5/bin \
-    PASSWORD=glassfish
+ENV         JAVA_HOME         /usr/lib/jvm/java-8-openjdk-amd64
+ENV         GLASSFISH_HOME    /usr/local/glassfish4
+ENV         PATH              $PATH:$JAVA_HOME/bin:$GLASSFISH_HOME/bin
 
-# Install packages, download and extract GlassFish
-# Setup password file
-# Enable DAS
-RUN apt-get install -y wget unzip 
-RUN wget --no-check-certificate ${GLASSFISH_URL}/${GLASSFISH_PKG} 
-RUN unzip -o ${GLASSFISH_PKG} 
-RUN rm -f ${GLASSFISH_PKG} 
-RUN apt-get remove --purge -y wget unzip 
-RUN echo "----- CREATE PASSWORD FILE --------------------" 
-RUN echo "AS_ADMIN_PASSWORD=" > /tmp/gfpassword
-RUN echo "AS_ADMIN_NEWPASSWORD=${PASSWORD}" >> /tmp/gfpassword
-RUN echo "----- CHANGE ADMIN PASSWORD AND SECURE ADMIN ACCESS --------------------"
-RUN asadmin --user=admin --passwordfile=/tmp/gfpassword change-admin-password --domain_name domain1
-RUN echo "----- ENABLE DOMAIN ADMINISTRATION SERVER --------------------"
+ENV ADMIN_USER admin
+ENV ADMIN_PASSWORD admin
+
+RUN	    apt-get update && apt-get install -y curl unzip zip inotify-tools && \
+            rm -rf /var/lib/apt/lists/; exit 0
+
+RUN         curl -L -o /tmp/glassfish-4.1.zip http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip && \
+            unzip /tmp/glassfish-4.1.zip -d /usr/local && \
+            rm -f /tmp/glassfish-4.1.zip
+
+EXPOSE      8080 4848 8181
+
+WORKDIR     /usr/local/glassfish4
+
+# set secure-admin enabled and default password
+RUN echo 'AS_ADMIN_PASSWORD=\n \
+          AS_ADMIN_NEWPASSWORD='$ADMIN_PASSWORD'\n \
+          EOF\n' \
+          >> /opt/tmpfile
+
+RUN echo 'AS_ADMIN_PASSWORD='$ADMIN_PASSWORD'\n \
+          EOF\n' \
+          >> /opt/pwdfile
+
+# during build of the container configuring GlassFish to enable secure-admin
+# default password admin admin
 RUN asadmin start-domain && \
-    echo "AS_ADMIN_PASSWORD=${PASSWORD}" > /tmp/gfpassword && \
-    asadmin --user=admin --passwordfile=/tmp/gfpassword enable-secure-admin && \
-    asadmin --user=admin stop-domain 
-
-# Ports being exposed
-EXPOSE 4848 8080 8181 9009
+    asadmin --user $ADMIN_USER --passwordfile=/opt/tmpfile change-admin-password && \
+    asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile enable-secure-admin && \
+    asadmin restart-domain
 
 COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
 
-# Start asadmin console and the domain
-CMD ["asadmin", "start-domain", "-v", "--debug"]
+CMD asadmin start-domain --debug --verbose

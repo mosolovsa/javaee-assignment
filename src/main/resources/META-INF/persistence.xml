@@ -3,13 +3,26 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <persistence-unit name="todos">
-        <class>com.ssau.laba1.model.TodoEntity</class>
+    <persistence-unit name="storesmalls" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/storesmalls</jta-data-source>
+        <!--    <persistence-unit name="storesmalls" transaction-type="JTA">-->
+<!--        <jta-data-source>org.postgresql.ds.PGSimpleDataSource</jta-data-source>-->
+<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+<!--        <jta-data-source>jdbc/postgresql</jta-data-source>-->
+<!--        <class>com.ssau.laba1.model.StoreEntity</class>-->
+<!--        <class>com.ssau.laba1.model.MallEntity</class>-->
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db:5432/postgres" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="postgres" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
+
+            <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
         </properties>
     </persistence-unit>
 </persistence>
