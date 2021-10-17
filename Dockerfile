@@ -44,7 +44,8 @@ RUN asadmin start-domain && \
 #pg-pool && \
 #    asadmin create-jdbc-connection-pool --connectionpoolid pg-pool jdbc/storesmalls
 
-COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
+# деплой вручную, все равно так написано в задании,
+# COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
 COPY postgresql-42.2.23.jar $GLASSFISH_HOME/glassfish/lib
 
 CMD asadmin start-domain --debug --verbose
