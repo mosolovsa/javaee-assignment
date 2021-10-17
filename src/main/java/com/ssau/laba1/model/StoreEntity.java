@@ -12,17 +12,17 @@ public class StoreEntity {
     private long id;
     private String name;
 
-//    @ManyToMany(mappedBy = "stores",
-//            fetch = FetchType.EAGER)
-//    private Set<MallEntity> malls = new HashSet<MallEntity>();
+    @ManyToMany(mappedBy = "stores",
+            fetch = FetchType.EAGER)
+    private Set<MallEntity> malls = new HashSet<MallEntity>();
 
     public StoreEntity() {}
 
-    public StoreEntity(long id, String name, Set<MallEntity> malls) {
-        this.id = id;
-        this.name = name;
-//        this.malls = malls;
-    }
+//    public StoreEntity(long id, String name, Set<MallEntity> malls) {
+//        this.id = id;
+//        this.name = name;
+////        this.malls = malls;
+//    }
 
     public long getId() {
         return id;
@@ -40,7 +40,11 @@ public class StoreEntity {
         this.name = name;
     }
 
-//    public Set<MallEntity> getMalls() {
-//        return malls;
-//    }
+    public Set<MallEntity> getMalls() {
+        return malls;
+    }
+
+    public void setMalls(Set<MallEntity> malls) {
+        this.malls = malls;
+    }
 }

@@ -21,4 +21,12 @@ public class StoresServlet extends HttpServlet {
         req.setAttribute("stores", storeBean.findAll());
         req.getRequestDispatcher("stores.jsp").forward(req, res);
     }
+
+    public StoreBean getStoreBean() {
+        return storeBean;
+    }
+
+    public void setStoreBean(StoreBean storeBean) {
+        this.storeBean = storeBean;
+    }
 }

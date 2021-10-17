@@ -14,21 +14,21 @@ public class MallEntity implements Serializable {
     private String name;
     private String address;
 
-    @ManyToMany(targetEntity = MallEntity.class,
+    @ManyToMany(targetEntity = StoreEntity.class,
             fetch = FetchType.EAGER)
     @JoinTable(name="relations",
-            joinColumns=@JoinColumn(name="store_id"),
-            inverseJoinColumns=@JoinColumn(name="mall_id"))
+            joinColumns=@JoinColumn(name="mall_id"),
+            inverseJoinColumns=@JoinColumn(name="store_id"))
     private Set<StoreEntity> stores = new HashSet<StoreEntity>();
 
     public MallEntity() {}
 
-    public MallEntity(long id, String name, String address, Set<StoreEntity> stores) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.stores = stores;
-    }
+//    public MallEntity(long id, String name, String address, Set<StoreEntity> stores) {
+//        this.id = id;
+//        this.name = name;
+//        this.address = address;
+//        setStores(stores);
+//    }
 
     public long getId() {
         return id;
@@ -56,5 +56,9 @@ public class MallEntity implements Serializable {
 
     public Set<StoreEntity> getStores() {
         return stores;
+    }
+
+    public void setStores(Set<StoreEntity> stores) {
+        this.stores = stores;
     }
 }

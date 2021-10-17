@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="storesmalls" transaction-type="JTA">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <jta-data-source>jdbc/storesmalls</jta-data-source>
         <!--    <persistence-unit name="storesmalls" transaction-type="JTA">-->
 <!--        <jta-data-source>org.postgresql.ds.PGSimpleDataSource</jta-data-source>-->

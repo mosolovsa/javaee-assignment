@@ -18,7 +18,8 @@ public class StoreBean {
 
     public List<StoreEntity> findAll() {
         Query findAll = em.createQuery("SELECT s FROM StoreEntity s");
-        return findAll.getResultList();
+        List<StoreEntity> results = findAll.getResultList();
+        return results;
     }
 
     public StoreEntity findById(Long id) {

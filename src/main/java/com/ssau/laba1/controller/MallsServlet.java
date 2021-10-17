@@ -13,12 +13,20 @@ import java.io.IOException;
 @WebServlet(name = "MallsServlet", urlPatterns = {"/malls"})
 public class MallsServlet extends HttpServlet {
     @EJB
-    private MallBean mallBean;
+    public MallBean mallBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         req.setAttribute("malls", mallBean.findAll());
         req.getRequestDispatcher("malls.jsp").forward(req, res);
+    }
+
+    public MallBean getMallBean() {
+        return mallBean;
+    }
+
+    public void setMallBean(MallBean mallBean) {
+        this.mallBean = mallBean;
     }
 }
