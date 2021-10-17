@@ -17,11 +17,11 @@
         <input type="hidden" name="id" value=${mall.id}>
         <div>
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="input input-store" placeholder = "Mall name" value="${store.name}">
+            <input type="text" name="name" id="name" class="input input-store" placeholder = "Mall name" value="${mall.name}">
         </div>
         <div>
             <label for="name">Address</label>
-            <input type="text" name="address" id="address" class="input input-store" placeholder = "Mall address" value="${store.address}">
+            <input type="text" name="address" id="address" class="input input-store" placeholder = "Mall address" value="${mall.address}">
         </div>
         <div>
             <div class="buttongroup">
