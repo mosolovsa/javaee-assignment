@@ -21,6 +21,7 @@ psql postgresql://postgres:postgres@localhost:5432 << EOF
 
        DROP TABLE IF EXISTS relations;
        CREATE TABLE relations(
+          id              SERIAL PRIMARY KEY    NOT NULL,
           mall_id         BIGINT                NOT NULL,
           store_id        BIGINT                NOT NULL
        );
