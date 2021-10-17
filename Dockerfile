@@ -35,6 +35,16 @@ RUN asadmin start-domain && \
     asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile enable-secure-admin && \
     asadmin restart-domain
 
+#RUN asadmin start-domain && \
+#    asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile \
+#create-jdbc-connection-pool \
+#--datasourceclassname oracle.jdbc.pool.OracleDataSource \
+#--restype javax.sql.DataSource \
+#--property user=postgres:password=postgres:serverName=db:portNumber=5432 \
+#pg-pool && \
+#    asadmin create-jdbc-connection-pool --connectionpoolid pg-pool jdbc/storesmalls
+
 COPY target/laba1-1.0-SNAPSHOT.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy
+COPY postgresql-42.2.23.jar $GLASSFISH_HOME/glassfish/lib
 
 CMD asadmin start-domain --debug --verbose
