@@ -13,8 +13,11 @@
         <c:forEach items="${malls}" var="mall">
             <tr><td> ${mall.id}</td>
                 <td> ${mall.name}</td>
-                <td> ${mall.cookery}</td>
-                <td><c:forEach items="${mall.stores}" var="store" begin="1">, ${store.name}</c:forEach></td>
+                <td> ${mall.address}</td>
+                <td>
+                    ${mall.stores.toArray()[0].name}
+                    <c:forEach items="${mall.stores}" var="store" begin="1">, ${store.name}</c:forEach>
+                </td>
         </c:forEach>
         </tbody>
     </table>
