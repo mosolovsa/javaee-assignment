@@ -27,3 +27,5 @@ target
 
 # db
 .pgdata
+
+!postgresql-42.2.23.jar
