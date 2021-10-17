@@ -21,6 +21,8 @@
                 <td>
                     <button class="btn" type="submit" onclick="location.href='del_malls?id=${mall.id}'">Delete</button>
                     <button class="btn" type="submit" formmethod="post" onclick="location.href='add_malls?id=${mall.id}'">Update</button>
+                    <button class="btn" type="submit" onclick="location.href='add_rels?mall_id=${mall.id}'">Add store</button>
+                    <button class="btn" type="submit" onclick="location.href='del_rels?mall_id=${mall.id}'">Remove store</button>
                 </td>
         </c:forEach>
         </tbody>
