@@ -27,5 +27,6 @@
         </c:forEach>
         </tbody>
     </table>
+    <button class="btn" type="submit" onclick="location.href='add_malls'">Add</button>
 </body>
 </html>
