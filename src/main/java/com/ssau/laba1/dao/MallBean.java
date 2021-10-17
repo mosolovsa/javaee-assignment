@@ -19,7 +19,8 @@ public class MallBean {
 
     public List<MallEntity> findAll() {
         Query findAll = em.createQuery("SELECT m FROM MallEntity m");
-        return findAll.getResultList();
+        List<MallEntity> results = findAll.getResultList();
+        return results;
     }
 
     public MallEntity findById(Long id) {
