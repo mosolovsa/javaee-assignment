@@ -18,6 +18,10 @@
                     ${mall.stores.toArray()[0].name}
                     <c:forEach items="${mall.stores}" var="store" begin="1">, ${store.name}</c:forEach>
                 </td>
+                <td>
+                    <button class="btn" type="submit" onclick="location.href='del_malls?id=${mall.id}'">Delete</button>
+                    <button class="btn" type="submit" formmethod="post" onclick="location.href='add_malls?id=${mall.id}'">Update</button>
+                </td>
         </c:forEach>
         </tbody>
     </table>

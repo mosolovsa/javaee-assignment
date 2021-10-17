@@ -21,12 +21,4 @@ public class MallsServlet extends HttpServlet {
         req.setAttribute("malls", mallBean.findAll());
         req.getRequestDispatcher("malls.jsp").forward(req, res);
     }
-
-    public MallBean getMallBean() {
-        return mallBean;
-    }
-
-    public void setMallBean(MallBean mallBean) {
-        this.mallBean = mallBean;
-    }
 }

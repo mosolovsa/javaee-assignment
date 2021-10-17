@@ -1,6 +1,6 @@
 package com.ssau.laba1.controller;
 
-import com.ssau.laba1.dao.StoreBean;
+import com.ssau.laba1.dao.MallBean;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,15 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "StoresServlet", urlPatterns = {"/stores"})
-public class StoresServlet extends HttpServlet {
+@WebServlet(name = "MallsDelServlet", urlPatterns = {"/del_malls"})
+public class MallsDelServlet extends HttpServlet {
     @EJB
-    private StoreBean storeBean;
+    public MallBean mallBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        req.setAttribute("stores", storeBean.findAll());
-        req.getRequestDispatcher("stores.jsp").forward(req, res);
+        long delete_id = Long.parseLong(req.getParameter("id"));
+        mallBean.delete(delete_id);
+        res.sendRedirect(req.getContextPath() + "/malls");
     }
 }

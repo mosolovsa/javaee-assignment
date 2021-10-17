@@ -14,9 +14,13 @@
         <tr>
             <td>${store.id}</td>
             <td>${store.name}</td>
-        </tr>
+            <td>
+                <button class="btn" type="submit" onclick="location.href='del_stores?id=${store.id}'">Delete</button>
+                <button class="btn" type="submit" formmethod="post" onclick="location.href='add_stores?id=${store.id}'">Update</button>
+            </td>
     </c:forEach>
     </tbody>
 </table>
+<button class="btn" type="submit" formmethod="get" onclick="location.href='add_stores'">Add new store</button>
 </body>
 </html>
